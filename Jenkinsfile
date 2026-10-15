@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('Qualité') {
-            failFast true
+            // failFast true
             parallel {
                 stage('Lint') {
                     steps {
