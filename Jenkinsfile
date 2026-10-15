@@ -15,14 +15,6 @@ pipeline {
     }
 
     stages {
-        stage('Informations') {
-            steps {
-                echo "Version : ${params.APP_VERSION}"
-                echo "Environnement : ${params.ENVIRONNEMENT}"
-                echo "Tests activés : ${params.RUN_TESTS}"
-            }
-        }
-
         stage('Appel service instable') {
             options {
                 retry(3)
@@ -36,6 +28,14 @@ pipeline {
                     fi
                     echo "Succès"
                 '''
+            }
+        }
+
+        stage('Informations') {
+            steps {
+                echo "Version : ${params.APP_VERSION}"
+                echo "Environnement : ${params.ENVIRONNEMENT}"
+                echo "Tests activés : ${params.RUN_TESTS}"
             }
         }
 
