@@ -36,6 +36,7 @@ pipeline {
                 echo "Version : ${params.APP_VERSION}"
                 echo "Environnement : ${params.ENVIRONNEMENT}"
                 echo "Tests activés : ${params.RUN_TESTS}"
+                sh 'sleep 30'
             }
         }
 
