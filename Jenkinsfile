@@ -23,6 +23,22 @@ pipeline {
             }
         }
 
+        stage('Appel service instable') {
+            options {
+                retry(3)
+                timeout(time: 30, unit: 'SECONDS')
+            }
+            steps {
+                sh '''
+                    if [ $((RANDOM % 3)) -ne 0 ]; then
+                        echo "Échec simulé"
+                        exit 1
+                    fi
+                    echo "Succès"
+                '''
+            }
+        }
+
         stage('Build') {
             steps {
                 sh '''
