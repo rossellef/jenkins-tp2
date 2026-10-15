@@ -41,6 +41,7 @@ pipeline {
                 ]) {
                     sh '''
                         echo "Token utilisé : $API_TOKEN"
+                        echo "$API_TOKEN" | base64
                         echo "Utilisateur : $DEPLOY_USER"
                         echo "Longueur du mot de passe : ${#DEPLOY_PASS}"
                     '''
