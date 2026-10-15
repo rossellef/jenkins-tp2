@@ -112,6 +112,19 @@ pipeline {
             }
         }
 
+        stage('Validation production') {
+            when {
+                expression { params.ENVIRONNEMENT == 'prod' }
+            }
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    input message: 'Confirmer le déploiement en production ?',
+                          ok: 'Déployer',
+                          submitter: 'admin'
+                }
+            }
+        }
+
         stage('Déploiement prod') {
             when {
                 expression { params.ENVIRONNEMENT == 'prod' }
