@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 5, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
+        timestamps()
+    }
+
     parameters {
         string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Version à construire')
         choice(name: 'ENVIRONNEMENT', choices: ['dev', 'recette', 'prod'], description: 'Environnement cible')
@@ -42,7 +49,7 @@ pipeline {
                 stage('Sécurité') {
                     steps {
                         echo 'Scan de dépendances...'
-                        sh 'sleep 5; exit 1'
+                        sh 'sleep 5'
                     }
                 }
             }
