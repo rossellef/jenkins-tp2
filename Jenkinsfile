@@ -120,5 +120,26 @@ pipeline {
                 echo 'Déploiement en production...'
             }
         }        
+
+        stage('Résumé') {
+            steps {
+                script {
+                    def etapes = ['Build', 'Qualité', 'Tests']
+                    etapes.each { e ->
+                        echo "Étape réalisée : ${e}"
+                    }
+
+                    def version = params.APP_VERSION.tokenize('.')
+                    echo "Version majeure : ${version[0]}"
+
+                    if (params.ENVIRONNEMENT == 'prod') {
+                        currentBuild.description = "PROD ${params.APP_VERSION}"
+                    } else {
+                        currentBuild.description = "${params.ENVIRONNEMENT} ${params.APP_VERSION}"
+                    }
+                }
+            }
+        }
+
     }
 }
