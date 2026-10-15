@@ -38,7 +38,7 @@ pipeline {
             when {
                 allOf {
                     expression { params.ENVIRONNEMENT == 'recette' }
-                    branch 'main'
+                    // branch 'main'
                 }
             }
             steps {
